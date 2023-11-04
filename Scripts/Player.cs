@@ -8,7 +8,10 @@ public partial class Player : CharacterBody3D
 
 	public float gravity = ProjectSettings.GetSetting("physics/3d/default_gravity").AsSingle();
 
-	public override void _PhysicsProcess(double delta)
+    public override void _Ready() =>
+		Position = GetNode<Node3D>("../SpawnPoint").Position;
+
+    public override void _PhysicsProcess(double delta)
 	{
 		Vector3 velocity = Velocity;
 
