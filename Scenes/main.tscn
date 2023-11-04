@@ -1,12 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://4lmcxfqal2qj"]
+[gd_scene load_steps=9 format=3 uid="uid://4lmcxfqal2qj"]
 
+[ext_resource type="Texture2D" uid="uid://c1o7yolp4j6im" path="res://Assets/Mist2.jpg" id="1_5v7je"]
 [ext_resource type="PackedScene" uid="uid://j2rsoe230qw7" path="res://Scenes/plane.tscn" id="1_sgyxp"]
-[ext_resource type="Texture2D" uid="uid://cloexsc4qf23l" path="res://Assets/Mist.jpg" id="2_cqkcp"]
 [ext_resource type="PackedScene" uid="uid://baw04geoyrvjw" path="res://Scenes/spawn_point.tscn" id="3_ou574"]
 [ext_resource type="PackedScene" uid="uid://dr7rogtrcjtww" path="res://Scenes/player.tscn" id="4_uyr6q"]
+[ext_resource type="Script" path="res://Scripts/Camera.cs" id="5_hjgi6"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_l2xxb"]
-panorama = ExtResource("2_cqkcp")
+panorama = ExtResource("1_5v7je")
 
 [sub_resource type="Sky" id="Sky_xxvok"]
 sky_material = SubResource("PanoramaSkyMaterial_l2xxb")
@@ -14,9 +15,10 @@ sky_material = SubResource("PanoramaSkyMaterial_l2xxb")
 [sub_resource type="Environment" id="Environment_q5d7w"]
 background_mode = 2
 sky = SubResource("Sky_xxvok")
+glow_enabled = true
 fog_enabled = true
 fog_light_energy = 0.0
-fog_sky_affect = 0.9
+fog_sky_affect = 0.95
 
 [node name="Main" type="Node"]
 
@@ -32,10 +34,12 @@ directional_shadow_blend_splits = true
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
 
 [node name="SpawnPoint" parent="." instance=ExtResource("3_ou574")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="Player" parent="." instance=ExtResource("4_uyr6q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
 
 [node name="Camera" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 7, 3)
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 6, 3)
+doppler_tracking = 2
+script = ExtResource("5_hjgi6")
