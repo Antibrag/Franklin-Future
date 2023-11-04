@@ -1,3 +1,21 @@
-[gd_scene format=3 uid="uid://baw04geoyrvjw"]
+[gd_scene load_steps=3 format=3 uid="uid://baw04geoyrvjw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_axh1f"]
+albedo_color = Color(0.529549, 1, 0.541268, 1)
+emission_enabled = true
+emission = Color(0, 1, 0, 1)
+emission_energy_multiplier = 3.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_fgjng"]
+material = SubResource("StandardMaterial3D_axh1f")
+radius = 0.15
+height = 0.3
 
 [node name="SpawnPoint" type="Node3D"]
+
+[node name="MeshInstance" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_fgjng")
+
+[node name="Label" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.169883, 0.985464, 0, -0.985464, 0.169883, 0, 0.341368, 0)
+text = "Spawn point"
