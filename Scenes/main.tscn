@@ -1,7 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://4lmcxfqal2qj"]
+[gd_scene load_steps=8 format=3 uid="uid://4lmcxfqal2qj"]
 
 [ext_resource type="PackedScene" uid="uid://j2rsoe230qw7" path="res://Scenes/plane.tscn" id="1_sgyxp"]
 [ext_resource type="Texture2D" uid="uid://cloexsc4qf23l" path="res://Assets/Mist.jpg" id="2_cqkcp"]
+[ext_resource type="PackedScene" uid="uid://baw04geoyrvjw" path="res://Scenes/spawn_point.tscn" id="3_ou574"]
+[ext_resource type="PackedScene" uid="uid://dr7rogtrcjtww" path="res://Scenes/player.tscn" id="4_uyr6q"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_l2xxb"]
 panorama = ExtResource("2_cqkcp")
@@ -21,10 +23,19 @@ fog_sky_affect = 0.9
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_q5d7w")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -0.707107, 0.707107, 0, -0.707107, -0.707107, 0, 9, -10)
+[node name="DirectionalLight" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-1, 6.18172e-08, 6.18172e-08, 0, -0.707107, 0.707107, 8.74228e-08, 0.707107, 0.707107, 0, 9, 10)
 shadow_enabled = true
 directional_shadow_blend_splits = true
 
 [node name="Plane" parent="." instance=ExtResource("1_sgyxp")]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+
+[node name="SpawnPoint" parent="." instance=ExtResource("3_ou574")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+
+[node name="Player" parent="." instance=ExtResource("4_uyr6q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Camera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 7, 3)
