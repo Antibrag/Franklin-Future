@@ -1,3 +1,23 @@
-[gd_scene format=3 uid="uid://4lmcxfqal2qj"]
+[gd_scene load_steps=6 format=3 uid="uid://4lmcxfqal2qj"]
+
+[ext_resource type="PackedScene" uid="uid://j2rsoe230qw7" path="res://Scenes/plane.tscn" id="1_sgyxp"]
+[ext_resource type="Texture2D" uid="uid://cloexsc4qf23l" path="res://Assets/Mist.jpg" id="2_cqkcp"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_l2xxb"]
+panorama = ExtResource("2_cqkcp")
+
+[sub_resource type="Sky" id="Sky_xxvok"]
+sky_material = SubResource("PanoramaSkyMaterial_l2xxb")
+
+[sub_resource type="Environment" id="Environment_q5d7w"]
+background_mode = 2
+background_energy_multiplier = 0.2
+sky = SubResource("Sky_xxvok")
 
 [node name="Main" type="Node"]
+
+[node name="Plane" parent="." instance=ExtResource("1_sgyxp")]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_q5d7w")
