@@ -11,13 +11,20 @@ sky_material = SubResource("PanoramaSkyMaterial_l2xxb")
 
 [sub_resource type="Environment" id="Environment_q5d7w"]
 background_mode = 2
-background_energy_multiplier = 0.2
 sky = SubResource("Sky_xxvok")
+fog_enabled = true
+fog_light_energy = 0.0
+fog_sky_affect = 0.9
 
 [node name="Main" type="Node"]
 
-[node name="Plane" parent="." instance=ExtResource("1_sgyxp")]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_q5d7w")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.707107, 0.707107, 0, -0.707107, -0.707107, 0, 9, -10)
+shadow_enabled = true
+directional_shadow_blend_splits = true
+
+[node name="Plane" parent="." instance=ExtResource("1_sgyxp")]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
