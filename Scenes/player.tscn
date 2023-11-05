@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://dr7rogtrcjtww"]
+[gd_scene load_steps=5 format=3 uid="uid://dr7rogtrcjtww"]
 
 [ext_resource type="Script" path="res://Scripts/Player.cs" id="1_qtbyt"]
 
@@ -6,11 +6,18 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_s5spy"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_p8m72"]
+size = Vector3(7, 7, 7)
+
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_qtbyt")
 
 [node name="MeshInstance" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_6nut8")
 
-[node name="CollisionShape" type="CollisionShape3D" parent="."]
+[node name="PlayerCollisionShape" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_s5spy")
+
+[node name="DetectionCollisionShape" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_p8m72")
+disabled = true
