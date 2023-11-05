@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://4lmcxfqal2qj"]
+[gd_scene load_steps=10 format=3 uid="uid://4lmcxfqal2qj"]
 
 [ext_resource type="Texture2D" uid="uid://c1o7yolp4j6im" path="res://Assets/Mist2.jpg" id="1_5v7je"]
+[ext_resource type="PackedScene" uid="uid://bhafwpttjwb58" path="res://Scenes/hud.tscn" id="1_kgmjf"]
 [ext_resource type="PackedScene" uid="uid://j2rsoe230qw7" path="res://Scenes/plane.tscn" id="1_sgyxp"]
 [ext_resource type="PackedScene" uid="uid://baw04geoyrvjw" path="res://Scenes/spawn_point.tscn" id="3_ou574"]
 [ext_resource type="PackedScene" uid="uid://dr7rogtrcjtww" path="res://Scenes/player.tscn" id="4_uyr6q"]
@@ -21,6 +22,8 @@ fog_light_energy = 0.0
 fog_sky_affect = 0.95
 
 [node name="Main" type="Node"]
+
+[node name="HUD" parent="." instance=ExtResource("1_kgmjf")]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_q5d7w")
