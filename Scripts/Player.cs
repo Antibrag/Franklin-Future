@@ -1,12 +1,11 @@
 using Godot;
-using System;
 
 public partial class Player : CharacterBody3D
 {		
 	private enum States
 	{
 		NORMAL,
-		SIT,
+		SITTING,
 		RUNNING,
 		DEAD
 	}
@@ -33,7 +32,7 @@ public partial class Player : CharacterBody3D
 		{
 			if (State == States.NORMAL || State == States.RUNNING) 
 			{
-				State = States.SIT;
+				State = States.SITTING;
 				Speed = NormalSpeed/2;
 				GetNode<CollisionShape3D>("DetectionCollisionShape").Scale = NormalDetectionScale/3;
 			}
@@ -47,7 +46,7 @@ public partial class Player : CharacterBody3D
 
 		if (Input.IsActionJustPressed("Running") && IsOnFloor())
 		{
-			if (State == States.NORMAL || State == States.SIT)
+			if (State == States.NORMAL || State == States.SITTING)
 			{
 				State = States.RUNNING;
 				Speed = NormalSpeed*2;
@@ -83,6 +82,7 @@ public partial class Player : CharacterBody3D
 	{
 		Position = GetNode<Node3D>("../SpawnPoint").Position;
 		NormalDetectionScale = GetNode<Node3D>("DetectionCollisionShape").Scale;
+		GetNode<AnimationPlayer>("test/AnimationPlayer").Play();
 	}
 
     public override void _PhysicsProcess(double delta)
