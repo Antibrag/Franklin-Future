@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://dr7rogtrcjtww"]
+[gd_scene load_steps=7 format=3 uid="uid://dr7rogtrcjtww"]
 
 [ext_resource type="Script" path="res://Scripts/Player.cs" id="1_qtbyt"]
+[ext_resource type="PackedScene" uid="uid://cynxy6em8mf3f" path="res://Models/LowPolyCharacterPack/LowPolyCharacter1.fbx" id="2_rj383"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_6nut8"]
 
@@ -9,8 +10,13 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_p8m72"]
 size = Vector3(7, 7, 7)
 
+[sub_resource type="BoxMesh" id="BoxMesh_uq0cv"]
+
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_qtbyt")
+
+[node name="test" parent="." instance=ExtResource("2_rj383")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.47572)
 
 [node name="MeshInstance" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_6nut8")
@@ -21,3 +27,7 @@ shape = SubResource("CapsuleShape3D_s5spy")
 [node name="DetectionCollisionShape" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_p8m72")
 disabled = true
+
+[node name="tt" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+mesh = SubResource("BoxMesh_uq0cv")
