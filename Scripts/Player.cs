@@ -2,7 +2,7 @@ using Godot;
 
 public partial class Player : CharacterBody3D
 {		
-	private enum States
+	public enum States
 	{
 		NORMAL,
 		SITTING,
@@ -10,13 +10,28 @@ public partial class Player : CharacterBody3D
 		DEAD
 	}
 
-	private const float NormalSpeed = 5.0f;
-	private Vector3 NormalDetectionScale;
-	private const float JumpVelocity = 4.5f;
-	
-	private float Speed = NormalSpeed;
+	//Constants
+	private const float JUMP_VELOCITY = 4.5f;
+	private const float NORMAL_SPEED = 5.0f;
 	private float gravity = ProjectSettings.GetSetting("physics/3d/default_gravity").AsSingle();
-	private States State = States.NORMAL;
+
+	private Vector3 NormalDetectionScale;
+	private float Speed = NORMAL_SPEED;
+
+	public States State { get; set; }
+
+	public override void _Ready()
+	{
+		State = States.NORMAL;
+		Position = GetNode<Node3D>("../SpawnPoint").Position;
+		NormalDetectionScale = GetNode<Node3D>("DetectionCollisionShape").Scale;
+	}
+
+	public override void _PhysicsProcess(double delta)
+	{
+		Movement(ref delta);
+		MoveAndSlide();
+	}
 
 	private void Movement(ref double delta)
 	{
@@ -26,20 +41,20 @@ public partial class Player : CharacterBody3D
 			velocity.Y -= gravity * (float)delta;
 
 		if (Input.IsActionJustPressed("Jump") && IsOnFloor())
-			velocity.Y = JumpVelocity;
+			velocity.Y = JUMP_VELOCITY;
 
 		if (Input.IsActionJustPressed("Sit") && IsOnFloor())
 		{
 			if (State == States.NORMAL || State == States.RUNNING) 
 			{
 				State = States.SITTING;
-				Speed = NormalSpeed/2;
+				Speed = NORMAL_SPEED/2;
 				GetNode<CollisionShape3D>("DetectionCollisionShape").Scale = NormalDetectionScale/3;
 			}
 			else 
 			{
 				State = States.NORMAL;
-				Speed = NormalSpeed;
+				Speed = NORMAL_SPEED;
 				GetNode<CollisionShape3D>("DetectionCollisionShape").Scale = NormalDetectionScale;
 			}
 		}
@@ -49,13 +64,13 @@ public partial class Player : CharacterBody3D
 			if (State == States.NORMAL || State == States.SITTING)
 			{
 				State = States.RUNNING;
-				Speed = NormalSpeed*2;
+				Speed = NORMAL_SPEED*2;
 				GetNode<CollisionShape3D>("DetectionCollisionShape").Scale = NormalDetectionScale*2;
 			}
 			else
 			{
 				State = States.NORMAL;
-				Speed = NormalSpeed;
+				Speed = NORMAL_SPEED;
 				GetNode<CollisionShape3D>("DetectionCollisionShape").Scale = NormalDetectionScale;
 			}
 		}
@@ -78,16 +93,7 @@ public partial class Player : CharacterBody3D
 		Velocity = velocity;
 	}
 
-    public override void _Ready()
-	{
-		Position = GetNode<Node3D>("../SpawnPoint").Position;
-		NormalDetectionScale = GetNode<Node3D>("DetectionCollisionShape").Scale;
-		GetNode<AnimationPlayer>("test/AnimationPlayer").Play();
-	}
 
-    public override void _PhysicsProcess(double delta)
-	{
-		Movement(ref delta);
-		MoveAndSlide();
-	}
+
+
 }
